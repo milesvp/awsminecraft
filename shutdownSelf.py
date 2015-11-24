@@ -16,16 +16,16 @@ def get_instance_id():
 def shutdown_self():
     ec2 = boto3.resource('ec2')
     try:
-        
         server_start_time = datetime.fromtimestamp(path.getmtime(TIMESTAMP_FILE))
-        if ((NOW - timedelta(minutes=110)) > server_start_time):
-            try:
-                remove(TIMESTAMP_FILE)
-            except OSError:
-                pass
-            ec2.instances.filter(InstanceIds=[get_instance_id(),]).stop()
     except:
         call(['touch', TIMESTAMP_FILE])
+        exit()
+    if ((NOW - timedelta(minutes=110)) > server_start_time):
+        try:
+            remove(TIMESTAMP_FILE)
+            ec2.instances.filter(InstanceIds=[get_instance_id(),]).stop()
+        except OSError:
+            pass
 
 
 if __name__ == "__main__":
