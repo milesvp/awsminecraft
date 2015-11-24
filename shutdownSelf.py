@@ -18,7 +18,6 @@ def shutdown_self():
     try:
         
         server_start_time = datetime.fromtimestamp(path.getmtime(TIMESTAMP_FILE))
-        print (server_start_time)
         if ((NOW - timedelta(minutes=110)) > server_start_time):
             try:
                 remove(TIMESTAMP_FILE)
