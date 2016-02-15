@@ -19,6 +19,7 @@ def shutdown_self():
         server_start_time = datetime.fromtimestamp(path.getmtime(TIMESTAMP_FILE))
     except:
         call(['touch', TIMESTAMP_FILE])
+        call(['chmod', '666', TIMESTAMP_FILE])
         exit()
     if ((NOW - timedelta(minutes=110)) > server_start_time):
         try:
